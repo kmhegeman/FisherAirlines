@@ -1,0 +1,42 @@
+<div class='main-nav'>
+    <div class='navbar navbar-inverse'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle' data-toggle='collapse' datatarget='.navbar-collapse'>
+ <span class='sr-only'>Toggle navigation</span>
+ <span class='icon-bar'></span>
+ <span class='icon-bar'></span>
+ <span class='icon-bar'></span> 
+ </button>
+            <a class='navbar-brand'>Fisher Airlines</a>
+        </div>
+        <div class='clearfix'></div>
+        <div class='navbar-collapse collapse'>
+            <ul class='nav navbar-nav'>
+                <li>
+                    <div ng-app="urlApp">
+                        <div ng-controller="">
+                            <span class='glyphicon glyphicon-home'></span> 
+                            <a href="" ng-click="ClickMeToRedirect()">Home</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div ng-app="urlApp">
+                        <div ng-controller="FlightStatusController">
+                            <span class='glyphicon glyphicon-time'></span> 
+                            <a href="flightstatus" ng-click="ClickMeToRedirect()">Flight Status</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div ng-app="urlApp">
+                        <div ng-controller="BookFlightController">
+                            <span class='glyphicon glyphicon-plane'></span> 
+                            <a href="bookflight" ng-click="ClickMeToRedirect()">Book Flight</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
