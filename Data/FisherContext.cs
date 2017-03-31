@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using FisherAirlines.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
 namespace FisherAirlines.Data
 {
-    public class FisherContext : DbContext
+    public class FisherContext : IdentityDbContext <ApplicationUser>
     {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
