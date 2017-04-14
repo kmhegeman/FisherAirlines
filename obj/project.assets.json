@@ -10435,16 +10435,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\AMIS3610\\FisherAirlines\\FisherAirlines.csproj",
+      "projectUniqueName": "c:\\AMIS3610\\FisherAirlines-ross\\FisherAirlines.csproj",
       "projectName": "FisherAirlines",
-      "projectPath": "c:\\AMIS3610\\FisherAirlines\\FisherAirlines.csproj",
-      "outputPath": "c:\\AMIS3610\\FisherAirlines\\obj\\",
+      "projectPath": "c:\\AMIS3610\\FisherAirlines-ross\\FisherAirlines.csproj",
+      "outputPath": "c:\\AMIS3610\\FisherAirlines-ross\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/FisherAirlines.dll": "c:\\AMIS3610\\FisherAirlines\\bin\\placeholder\\netcoreapp1.1\\FisherAirlines.dll"
+        "lib/netcoreapp1.1/FisherAirlines.dll": "c:\\AMIS3610\\FisherAirlines-ross\\bin\\placeholder\\netcoreapp1.1\\FisherAirlines.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {

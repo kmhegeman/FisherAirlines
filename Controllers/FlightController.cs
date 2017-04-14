@@ -20,13 +20,13 @@ public FlightController(FisherContext context){
 
 [HttpPost]        
 public IActionResult Post([FromBody] Flight flight) {            
-    var newClaim = db.Flight.Add(flight);            
+    var newFlight = db.Flight.Add(flight);            
     db.SaveChanges();            
     return CreatedAtRoute("GetFlight", new { id = flight.Id }, flight);        
     }
 
 //GET flightstatus
-[HttpGet("GetFlights/")]        
+[HttpGet("GetFlights")]        
 public IActionResult GetFlights(){            
     return Ok(db.Flight);        }
 

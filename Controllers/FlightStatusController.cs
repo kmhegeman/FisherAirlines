@@ -14,7 +14,7 @@ public FlightStatusController(FisherContext context){
 
 [HttpPost]        
 public IActionResult Post([FromBody] Flight flight) {            
-    var newClaim = db.Flights.Add(flight);            
+    var newFlight = db.Flight.Add(flight);            
     db.SaveChanges();            
     return CreatedAtRoute("GetFlight", new { id = flight.Id }, flight);        
     }
@@ -22,17 +22,17 @@ public IActionResult Post([FromBody] Flight flight) {
 //GET flightstatus
 [HttpGet]        
 public IActionResult GetFlights(){            
-    return Ok(db.Flights);        }
+    return Ok(db.Flight);        }
 
 
 [HttpGet("{id}", Name = "GetFlights")]        
 public IActionResult Get(int id)        {            
-        return Ok(db.Flights.Find(id));        }
+        return Ok(db.Flight.Find(id));        }
 //PUT flightstatus
 
 [HttpPut("{id}")]        
 public IActionResult Put(int id, [FromBody] Flight flight)        {            
-    var newFlight = db.Flights.Find(id);            
+    var newFlight = db.Flight.Find(id);            
     if (newFlight == null)            {                
         return NotFound();            }            
         newFlight = flight;            
@@ -43,11 +43,11 @@ public IActionResult Put(int id, [FromBody] Flight flight)        {
 
 [HttpDelete("{id}")]        
 public IActionResult Delete(int id){            
-    var flightToDelete = db.Flights.Find(id);            
+    var flightToDelete = db.Flight.Find(id);            
     if (flightToDelete == null){                
         return NotFound();   
         }            
-        db.Flights.Remove(flightToDelete);            
+        db.Flight.Remove(flightToDelete);            
         db.SaveChangesAsync();            
         return NoContent();
 }

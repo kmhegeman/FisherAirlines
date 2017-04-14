@@ -7,3 +7,12 @@ c:\AMIS3610\FisherAirlines\bin\Debug\netcoreapp1.1\FisherAirlines.pdb
 c:\AMIS3610\FisherAirlines\obj\Debug\netcoreapp1.1\FisherAirlines.dll
 c:\AMIS3610\FisherAirlines\obj\Debug\netcoreapp1.1\FisherAirlines.pdb
 c:\AMIS3610\FisherAirlines\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+c:\AMIS3610\FisherAirlines-ross\bin\Debug\netcoreapp1.1\FisherAirlines.deps.json
+c:\AMIS3610\FisherAirlines-ross\bin\Debug\netcoreapp1.1\FisherAirlines.runtimeconfig.json
+c:\AMIS3610\FisherAirlines-ross\bin\Debug\netcoreapp1.1\FisherAirlines.runtimeconfig.dev.json
+c:\AMIS3610\FisherAirlines-ross\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+c:\AMIS3610\FisherAirlines-ross\obj\Debug\netcoreapp1.1\FisherAirlines.AssemblyInfo.cs
+c:\AMIS3610\FisherAirlines-ross\obj\Debug\netcoreapp1.1\FisherAirlines.dll
+c:\AMIS3610\FisherAirlines-ross\obj\Debug\netcoreapp1.1\FisherAirlines.pdb
+c:\AMIS3610\FisherAirlines-ross\bin\Debug\netcoreapp1.1\FisherAirlines.dll
+c:\AMIS3610\FisherAirlines-ross\bin\Debug\netcoreapp1.1\FisherAirlines.pdb
