@@ -32,13 +32,13 @@ export class FlightService {
 // updates the [GET] /flightstatus/get flightstatus/{n} Web API method to retrive flights in the flightstatus controller.
 
  GetFlightStatus(FlightId, Destination, Departure, DepartDate) {
- var url = this.baseUrl + "flightstatus/GetFlightStatus/";
+ var url = this.baseUrl + "flightstatus/{FlightId}";
  return this.http.get(url)
  .map(response => response.json())
  .catch(this.handleError);
  }
  // updates the [POST] /checkout/{n} Web API method to add bookings in the bookings controller.
- 
+
  Checkout(Bookings) {
  var url = this.baseUrl + "checkout/";
  return this.http.get(url)

@@ -7,7 +7,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-[Route("flightstatus")]
+[Route("flightstatus/{id}")]
+
 public class FlightStatusController : Controller {
 
     private readonly FisherContext db;
@@ -16,7 +17,7 @@ public FlightStatusController(FisherContext context){
     db = context;       }
 
 //POST flightstatus
-[HttpGet]
+[HttpGet("flightstatus/{id}")]
 public IActionResult GetFlightStatus(int FlightId, string Destination, string Departure, DateTime DepartDate )
 {
 

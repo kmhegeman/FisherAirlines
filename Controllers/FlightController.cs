@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
-[Route("flight")]
+[Route("api/flight")]
 public class FlightController : Controller {
 
     private readonly FisherContext db;
@@ -18,7 +18,7 @@ public FlightController(FisherContext context){
 
 //Gett Flights from query
 
-[HttpGet]
+[HttpGet("GetFlights")]
 public IActionResult GetFlights(string Destination, string Departure, DateTime DepartDate, int Passengers)
 {
 
