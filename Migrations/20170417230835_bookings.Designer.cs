@@ -8,9 +8,10 @@ using FisherAirlines.Data;
 namespace FisherAirlines.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    partial class FisherContextModelSnapshot : ModelSnapshot
+    [Migration("20170417230835_bookings")]
+    partial class bookings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
