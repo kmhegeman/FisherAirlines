@@ -1,29 +1,36 @@
-    <h1>Search Flights</h1>
+<h1>Search Flights</h1>
     <h2></h2>
-    <form>
-    <p></p>
-    <div></div>
-    <label>Source:     </label> <input ng-model="Source"> 
-    <p>{{Source}}</p>
+  
+    <form class="form-flight" [formGroup]="FlightForm" (submit)="GetFlights($event)">
     <label>Destination:</label> <input ng-model="Destination"> 
     <p>{{Destination}}</p>
 
-    <label>Round Trip</label>
-    <input type="checkbox" ng-model="FlightType" />
-    <p></p>
+    <label>Departure:</label> <input ng-model="Departure"> 
+    <p>{{Departure}}</p>
+
+    
     <label>Depart Date:</label><input type="date" ng-Model="DepartDate"/>
     <p>{{DepartDate}}</p>
 
-    <div ng-if="FlightType">
-     <label>Return Date:</label> <input type="date" ng-Model="ReturnDate" min="DepartDate"/>
-    <p>{{ReturnDate}}</p>
-    </div>
 
     <label>Number of Passengers:</label> <input type="number" name="quantity" min="1" max="10">
     <p>{{Passengers}}</p>
 
        <p>
-      <button click="save()">Save</button>
-      <button click="cancel()">Cancel</button>
+      <button type="submit">Search</button>
     </p>
     </form>
+    <div>
+  <h2></h2>
+  <ul class="flights">
+    <li *ngFor="let flight of flights"
+      [class.selected]="flight == selectedFlight"
+      (click)="onSelect(flight)">
+      <span class="badge">{{flight.id}}</span> {{flight.desintation}}
+    </li>
+  </ul>
+  <div *ngIf="selectedFlight">
+    <h2>{{selectedFlight.id | uppercase}} is my Flight</h2>
+    <button (click)="gotoCheckout()">Checkout</button>
+  </div>
+</div>

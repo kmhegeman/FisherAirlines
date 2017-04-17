@@ -8,68 +8,40 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
-[RouteAttribute("api/flight")]
+[Route("flight")]
 public class FlightController : Controller {
 
     private readonly FisherContext db;
 
 public FlightController(FisherContext context){           
-    db = context;       
-    }
+    db = context;       }
 
-//POST flightstatus
-
-[HttpPost]        
-public IActionResult Post([FromBody] Flight flight) {            
-    var newFlight = db.Flight.Add(flight);            
-    db.SaveChanges();            
-    return CreatedAtRoute("GetFlight", new { id = flight.Id }, flight);        
-    }
-
-//GET flightstatus
-[HttpGet("GetFlights")]        
-public IActionResult GetFlights(){            
-    return Ok(db.Flight);        }
-
-
-[HttpGet]        
-public IActionResult Get(int id)        {            
-        return Ok(db.Flight.Find(id));        }
-//PUT flightstatus
+//Gett Flights from query
 
 [HttpGet]
- public JsonResult GetLatest(int num)
+public IActionResult GetFlights(string Destination, string Departure, DateTime DepartDate, int Passengers)
+{
+
+    var query = from a in db.Flight where a.Destination == Destination && a.Departure == Departure && a.DepartDate.Date == DepartDate.Date && a.AvailableSeats >= Passengers
+    orderby a.Price select a;
+
+     return Ok(query);
+}
+
+//PUT update available seats after new reservation
+
+[HttpPut("{id}")]
+ public IActionResult UpdateSeats(int id, [FromBody] Flight flight, int Passengers)
  {
- var arr = new List<Flight>();
- for (int i = 1; i <= num; i++) arr.Add(new Flight() {
- Id = i,
- 
- });
- var settings = new JsonSerializerSettings() {
- Formatting = Formatting.Indented
- };
- return new JsonResult(arr, settings);
+
+ var searchflight = db.Flight.Where(i => i.Id ==
+ id);
+ if (flight != null){
+    flight.AvailableSeats = flight.AvailableSeats - Passengers;
+    db.SaveChanges();
+    return Ok(searchflight);
  }
 
-[HttpPut("{id}")]        
-public IActionResult Put(int id, [FromBody] Flight flight)        {            
-    var newFlight = db.Flight.Find(id);            
-    if (newFlight == null)            {                
-        return NotFound();            }            
-        newFlight = flight;            
-        db.SaveChanges();            
-        return Ok(newFlight);
-}
-//DELETE flightstatus
-
-[HttpDelete("{id}")]        
-public IActionResult Delete(int id){            
-    var flightToDelete = db.Flight.Find(id);            
-    if (flightToDelete == null){                
-        return NotFound();   
-        }            
-        db.Flight.Remove(flightToDelete);            
-        db.SaveChangesAsync();            
-        return NoContent();
+ return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });
 }
 }
