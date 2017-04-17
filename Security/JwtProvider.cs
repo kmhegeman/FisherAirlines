@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace FisherAirlines.Security
 {
@@ -26,7 +27,7 @@ namespace FisherAirlines.Security
         public static readonly SymmetricSecurityKey SecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(PrivateKey));
 
         public static readonly string Issuer = "FisherAirlines";
-        public static string TokenEndPoint = "api/connect/token";
+        public static string TokenEndPoint = "/api/connect/token";
 
         public JwtProvider(RequestDelegate next, FisherContext db, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -56,7 +57,7 @@ namespace FisherAirlines.Security
                 return _next(httpContext);
             }
 
-            if (!httpContext.Request.Method.Equals("POST") && httpContext.Request.HasFormContentType)
+            if (httpContext.Request.Method.Equals("POST") && httpContext.Request.HasFormContentType)
             {
                 return CreateToken(httpContext);
             }
@@ -90,15 +91,21 @@ namespace FisherAirlines.Security
                     DateTime now = DateTime.UtcNow;
 
                     //create the claims about the user for the token
-                    var claims = new[]
+                    var claims = new List<Claim>()
                     {
                         new Claim(JwtRegisteredClaimNames.Iss, Issuer),
                         new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now)
-                                                                    .ToUnixTimeSeconds()
-                                                                    .ToString(), ClaimValueTypes.Integer64)
+                        new Claim(JwtRegisteredClaimNames.Iat, new DateTimeOffset(now).ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer64),
+                        new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                        new Claim(JwtRegisteredClaimNames.GivenName, user.UserName) 
                     };
+
+                    var roles = await UserManager.GetRolesAsync(user); 
+                    foreach (var role in roles) 
+                    {         
+                        claims.Add(new Claim(ClaimTypes.Role, role)); 
+                    } 
 
                     //create the actual token
                     var token = new JwtSecurityToken(

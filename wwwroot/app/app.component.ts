@@ -3,7 +3,7 @@ import {APP_BASE_HREF} from 'angular2/common';
 
 @Component({
  selector: 'fisher-airlines',
- templateUrl: './app/app.component.html',
+ templateUrl: './app/app.component.html'
 
 })
 

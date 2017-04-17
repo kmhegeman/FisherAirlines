@@ -15,7 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace FisherAirlines
 {
-    public class Startup
+   public class Startup
     {
         public Startup(IHostingEnvironment env)
         {
@@ -31,11 +31,9 @@ namespace FisherAirlines
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        
         {
-            // Add framework services.
+            
             services.AddMvc();
-
             services.AddIdentity<ApplicationUser, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = true;
@@ -46,14 +44,17 @@ namespace FisherAirlines
             .AddDefaultTokenProviders();
 
             services.AddDbContext<FisherContext>();
+            services.AddSingleton<DbSeeder>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory
+        , DbSeeder dbSeeder)
         {
-
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            
+            loggerFactory.AddDebug();
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -61,7 +62,7 @@ namespace FisherAirlines
             app.UseJwtProvider();
 
             //add the built in authentication 
-             app.UseJwtBearerAuthentication(new JwtBearerOptions()
+            app.UseJwtBearerAuthentication(new JwtBearerOptions()
             {
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
@@ -82,6 +83,14 @@ namespace FisherAirlines
             //app.UseCookieAuthentication();
 
             app.UseMvc();
+
+            try{
+                dbSeeder.SeedAsync().Wait();
+            }
+            catch (AggregateException e){
+                throw new Exception(e.ToString());
+            }
         }
+
     }
 }

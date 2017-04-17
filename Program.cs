@@ -13,7 +13,7 @@ namespace FisherAirlines
     {
         public static void Main(string[] args)
         {
-  
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())

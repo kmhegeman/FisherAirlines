@@ -1,4 +1,5 @@
 import { Component} from '@angular/core';
+import { AuthService } from '../../auth.service';
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({

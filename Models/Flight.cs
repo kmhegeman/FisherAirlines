@@ -1,25 +1,27 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FisherAirlines.Models
 {
     public class Flight
     {
-
+        [Key]
         public int Id { get; set; }
 
-        public string Source {get; set; }
+        public string Departure {get; set; }
 
         public string Destination { get; set; }
         
         public DateTime DepartDate { get; set; }
 
-        public DateTime ReturnDate { get; set; }
-
-        public int Passengers { get; set; }
-
-        public Boolean FlightType { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:H:mm}")]
+        public DateTime ArrivalTime { get; set; }
          
-        public string Status { get; set; }
+        public int AvailableSeats { get; set; }
+
+        public int Price { get; set; }
 
     }
 }
