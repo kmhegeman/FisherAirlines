@@ -1,5 +1,14 @@
-<select>
-  <option *ngFor="let country of countries" value= {{FlightType.name}}>
-    {{FlightType.name}}
-  </option>
-</select>
+<div>
+  <h2>My Flights</h2>
+  <ul class="flights">
+    <li *ngFor="let flight of flights"
+      [class.selected]="flight == selectedFlight"
+      (click)="onSelect(flight)">
+      <span class="badge">{{flight.id}}</span> {{flight.desintation}}
+    </li>
+  </ul>
+  <div *ngIf="selectedFlight">
+    <h2>{{selectedFlight.name | uppercase}} is my hero</h2>
+    <button (click)="gotoCheckout()">Checkout</button>
+  </div>
+</div>

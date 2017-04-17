@@ -8,9 +8,10 @@ using FisherAirlines.Data;
 namespace FisherAirlines.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    partial class FisherContextModelSnapshot : ModelSnapshot
+    [Migration("20170414211722_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1");
