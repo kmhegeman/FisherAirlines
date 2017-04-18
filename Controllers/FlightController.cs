@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
-[Route("api/flight")]
+[Route("flight")]
 public class FlightController : Controller {
 
     private readonly FisherContext db;

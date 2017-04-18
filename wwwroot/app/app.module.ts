@@ -12,6 +12,7 @@ import { BookComponent } from './components/book/book.component';
 import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component'
 import { CheckoutComponent } from './components/book/checkout.component';
+import { FlightListComponent } from './components/book/Flightlist.component';
 
 import { AppRouting } from './app.routing';
 import { AuthService } from "./auth.service";
@@ -25,6 +26,7 @@ import { FlightService } from "./flight.service"
  LoginComponent,
  NavBarComponent,
  CheckoutComponent,
+ FlightListComponent,
  BookComponent,
  ], 
  imports: [

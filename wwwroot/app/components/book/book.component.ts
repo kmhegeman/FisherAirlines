@@ -1,10 +1,10 @@
 import {DATEPICKER_DIRECTIVES} from 'ng2-bootstrap/ng2-bootstrap';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 import {FlightService} from '../../flight.service';
 import {CheckoutComponent} from './checkout.component';
 import {Flight} from './flight';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, CustomValidators } from '@angular/forms';
 
 @Component({
  selector: 'book-flight',
@@ -12,40 +12,33 @@ import { FormBuilder, Validators } from '@angular/forms';
  styles: ['./app/components/book/book.component.css'],
 })
 export class BookComponent implements OnInit{
-FlightForm = null;
+FlightForm: FormGroup;
 public flight: Flight[];
 public selectedFlight: Flight; 
 errorMessage: string;
+today: Date = new Date();
+Destination: string;
+Departure: string;
+DepartDate: Date;
+Passengers: number;
 
 
-constructor(private flightService: FlightService, private router: Router, private fb: FormBuilder,)
+constructor(private fb: FormBuilder, private flightService: FlightService, private router: Router)
  { this.FlightForm = fb.group({
-            Desintation: [""],
-            Departure: [""],
-            DeparDate: [""],
-            Passengers: [""],
+            Destination: ['' , Validators.maxLength(20)],
+            Departure: ['', Validators.maxLength(20)],
+            DepartDate: [''],
+            Passengers: [''],
         });
       }
 
- getFlights(e) {
-   e.preventDefault();
-      var Destination = this.FlightForm.value.Destination;
-      var Departure = this.FlightForm.value.Departure;
-      var DepartDate = this.FlightForm.value.DepartDate;
-      var Passengers = this.FlightForm.value.Passengers;
-      this.flightService.getFlights(Destination, Departure, DepartDate, Passengers).then(flights => this.flight = flights);
+ GetFlights(FlightForm) {
+      let Destination = this.FlightForm.value.Desintation
+      let Departure = this.FlightForm.value.Departure
+      let DepartDate = this.FlightForm.value.DepartDate
+      let Passengers = this.FlightForm.value.Passengers
+      this.router.navigate(['flight/GetFlights', { Destination, Departure, DepartDate, Passengers }]);
 }
 
- onSelect(flight: Flight) {
- this.selectedFlight = flight;
- console.log("item with Id " + this.selectedFlight.Id + "has been selected.");
- }
-
-
-  gotoCheckout() {
-    let Passengers = this.FlightForm.value.Passengers;
-    let Price = this.FlightForm.value.Passengers*this.selectedFlight.Price;
-    this.router.navigate(['CheckoutComponent', { id: this.selectedFlight.Id, Passengers, Price }]);
-  }
 
 } 
