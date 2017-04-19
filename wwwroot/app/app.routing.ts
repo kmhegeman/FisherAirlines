@@ -1,3 +1,4 @@
+import { MyticketsComponent } from './components/mytickets/mytickets.component';
 import { ModuleWithProviders } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { HomeComponent } from './components/home/home.component';
@@ -26,6 +27,11 @@ const appRoutes: Routes = [
     {
         path: "login",
         component: LoginComponent
+    },
+    
+    {
+        path:"mytickets",
+        component: MyticketsComponent
     }];
     
     export const AppRoutingProviders: any[] = [];
