@@ -1,3 +1,4 @@
+import { MyticketsComponent } from './components/mytickets/mytickets.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -28,6 +29,7 @@ import { FlightService } from "./flight.service"
  CheckoutComponent,
  FlightListComponent,
  BookComponent,
+ MyticketsComponent,
  ], 
  imports: [
         BrowserModule,

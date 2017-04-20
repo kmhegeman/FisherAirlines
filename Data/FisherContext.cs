@@ -16,8 +16,8 @@ namespace FisherAirlines.Data
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-    string connection = "User ID=fisher-user;Password=password;Host=localhost;Port=5432;Database=fisher-airlines;Pooling=true;";
-    optionsBuilder.UseNpgsql(connection);
+    string connection = "Data Source=c:/AMIS3610/FisherAirlines/fisher-airlines.sqlite;";
+    optionsBuilder.UseSqlite(connection);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

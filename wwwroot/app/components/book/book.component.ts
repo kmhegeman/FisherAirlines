@@ -33,11 +33,11 @@ constructor(private fb: FormBuilder, private flightService: FlightService, priva
       }
 
  GetFlights(FlightForm) {
-      let Destination = this.FlightForm.value.Desintation
+      let Destination = this.FlightForm.value.Destination
       let Departure = this.FlightForm.value.Departure
       let DepartDate = this.FlightForm.value.DepartDate
       let Passengers = this.FlightForm.value.Passengers
-      this.router.navigate(['flight/GetFlights', { Destination, Departure, DepartDate, Passengers }]);
+      this.router.navigate(['flight/GetFlights'], {queryParams:{ Destination, Departure, DepartDate, Passengers }});
 }
 
 
