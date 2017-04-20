@@ -1,36 +1,16 @@
-<h1>Search Flights</h1>
+<div class="container">
+    <h1>Search Flights</h1>
     <h2></h2>
-  
-    <form class="form-flight" [formGroup]="FlightForm" (submit)="GetFlights($event)">
-    <label>Destination:</label> <input ng-model="Destination"> 
-    <p>{{Destination}}</p>
-
-    <label>Departure:</label> <input ng-model="Departure"> 
-    <p>{{Departure}}</p>
-
-    
-    <label>Depart Date:</label><input type="date" ng-Model="DepartDate"/>
-    <p>{{DepartDate}}</p>
-
-
-    <label>Number of Passengers:</label> <input type="number" name="quantity" min="1" max="10">
-    <p>{{Passengers}}</p>
-
-       <p>
-      <button type="submit">Search</button>
-    </p>
+    <form  [formGroup]="FlightForm" (submit)="GetFlights(Destination, Departure, DepartDate, Passengers)">
+        <div class= "FormGroup">
+            <label>Destination:</label> <input formControlName="Destination"> 
+            <label>Departure:</label> <input formControlName="Departure"> 
+            <label>Depart Date:</label><input type="date" formControlName="DepartDate" minDate="2017-04-18"/>
+            <label>Number of Passengers:</label> <input type="number" formControlName="Passengers" min="1" max="10">
+        </div>
+      <button type="GetFlights(FlightForm.value)">Search</button>
     </form>
-    <div>
-  <h2></h2>
-  <ul class="flights">
-    <li *ngFor="let flight of flights"
-      [class.selected]="flight == selectedFlight"
-      (click)="onSelect(flight)">
-      <span class="badge">{{flight.id}}</span> {{flight.desintation}}
-    </li>
-  </ul>
-  <div *ngIf="selectedFlight">
-    <h2>{{selectedFlight.id | uppercase}} is my Flight</h2>
-    <button (click)="gotoCheckout()">Checkout</button>
-  </div>
+
+    <p>Value: {{ FlightForm.value | json}}</p>
+    <p>Validation Status: {{ FlightForm.status }} </p>
 </div>
