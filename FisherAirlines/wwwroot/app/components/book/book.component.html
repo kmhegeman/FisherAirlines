@@ -1,0 +1,16 @@
+<div class="container">
+    <h1>Search Flights</h1>
+    <h2></h2>
+    <form  [formGroup]="FlightForm" (submit)="GetFlights(Destination, Departure, DepartDate, Passengers)">
+        <div class= "FormGroup">
+            <label>Destination:</label> <input formControlName="Destination"> 
+            <label>Departure:</label> <input formControlName="Departure"> 
+            <label>Depart Date:</label><input type="date" formControlName="DepartDate" minDate="2017-04-18"/>
+            <label>Number of Passengers:</label> <input type="number" formControlName="Passengers" min="1" max="10">
+        </div>
+      <button type="GetFlights(FlightForm.value)">Search</button>
+    </form>
+
+    <p>Value: {{ FlightForm.value | json}}</p>
+    <p>Validation Status: {{ FlightForm.status }} </p>
+</div>
