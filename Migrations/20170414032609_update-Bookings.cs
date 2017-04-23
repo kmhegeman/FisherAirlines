@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FisherAirlines.Migrations
 {
-    public partial class init : Migration
+    public partial class updateBookings : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

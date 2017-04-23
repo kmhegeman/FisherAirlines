@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router'; 
-
-import { AuthService } from '../../auth.service'; 
+import { AuthService } from '../../auth.service';
 
 @Component({
     selector: 'login',
@@ -35,8 +34,6 @@ export class LoginComponent {
             .subscribe((data) => {
                 // login successful
                 this.loginError = false;
-                var auth = this.authService.getAuth();
-                alert("Our Token is: " + auth.access_token);
                 this.router.navigate([""]);
             },
             (err) => {

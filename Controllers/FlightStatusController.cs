@@ -1,8 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using FisherAirlines.Data;
 using FisherAirlines.Models;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 
-[Route("")]
+[Route("flightstatus/{id}")]
+
 public class FlightStatusController : Controller {
 
     private readonly FisherContext db;
@@ -11,44 +17,15 @@ public FlightStatusController(FisherContext context){
     db = context;       }
 
 //POST flightstatus
+//[HttpGet("flightstatus/{id}")]
+public IActionResult GetFlightStatus(int FlightId, string Destination, string Departure, DateTime DepartDate )
+{
 
-[HttpPost]        
-public IActionResult Post([FromBody] Flight flight) {            
-    var newClaim = db.Flights.Add(flight);            
-    db.SaveChanges();            
-    return CreatedAtRoute("GetFlight", new { id = flight.Id }, flight);        
-    }
+    var query = from a in db.FlightStatus where a.Destination == Destination || a.Departure == Departure || a.DepartDate.Date == DepartDate.Date || a.FlightId == FlightId
+    orderby a.FlightId select a;
 
-//GET flightstatus
-[HttpGet]        
-public IActionResult GetFlights(){            
-    return Ok(db.Flights);        }
-
-
-[HttpGet("{id}", Name = "GetFlights")]        
-public IActionResult Get(int id)        {            
-        return Ok(db.Flights.Find(id));        }
-//PUT flightstatus
-
-[HttpPut("{id}")]        
-public IActionResult Put(int id, [FromBody] Flight flight)        {            
-    var newFlight = db.Flights.Find(id);            
-    if (newFlight == null)            {                
-        return NotFound();            }            
-        newFlight = flight;            
-        db.SaveChanges();            
-        return Ok(newFlight);
+     return Ok(query);
 }
-//DELETE flightstatus
 
-[HttpDelete("{id}")]        
-public IActionResult Delete(int id){            
-    var flightToDelete = db.Flights.Find(id);            
-    if (flightToDelete == null){                
-        return NotFound();   
-        }            
-        db.Flights.Remove(flightToDelete);            
-        db.SaveChangesAsync();            
-        return NoContent();
-}
+
 }

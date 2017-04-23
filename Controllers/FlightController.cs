@@ -1,8 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using FisherAirlines.Data;
 using FisherAirlines.Models;
+using System.Linq;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Data;
 
-[Route("")]
+[Route("flights")]
 public class FlightController : Controller {
 
     private readonly FisherContext db;
@@ -10,45 +16,33 @@ public class FlightController : Controller {
 public FlightController(FisherContext context){           
     db = context;       }
 
-//POST flightstatus
+//Get Flights from query
 
-[HttpPost]        
-public IActionResult Post([FromBody] Flight flight) {            
-    var newClaim = db.Flights.Add(flight);            
-    db.SaveChanges();            
-    return CreatedAtRoute("GetFlight", new { id = flight.Id }, flight);        
-    }
+[HttpGet("GetFlights")]
+public IActionResult GetFlights(string Destination, string Departure, DateTime DepartDate, int Passengers)
+{
 
-//GET flightstatus
-[HttpGet]        
-public IActionResult GetFlights(){            
-    return Ok(db.Flights);        }
+    var query = from a in db.Flight where a.Destination == Destination && a.Departure == Departure && a.DepartDate.Date == DepartDate.Date && a.AvailableSeats >= Passengers
+    orderby a.Price select a;
 
-
-[HttpGet("{id}", Name = "GetFlights")]        
-public IActionResult Get(int id)        {            
-        return Ok(db.Flights.Find(id));        }
-//PUT flightstatus
-
-[HttpPut("{id}")]        
-public IActionResult Put(int id, [FromBody] Flight flight)        {            
-    var newFlight = db.Flights.Find(id);            
-    if (newFlight == null)            {                
-        return NotFound();            }            
-        newFlight = flight;            
-        db.SaveChanges();            
-        return Ok(newFlight);
+     return Ok(query);
 }
-//DELETE flightstatus
 
-[HttpDelete("{id}")]        
-public IActionResult Delete(int id){            
-    var flightToDelete = db.Flights.Find(id);            
-    if (flightToDelete == null){                
-        return NotFound();   
-        }            
-        db.Flights.Remove(flightToDelete);            
-        db.SaveChangesAsync();            
-        return NoContent();
+//PUT update available seats after new reservation
+
+[HttpPut("{id}")]
+ public IActionResult UpdateSeats(int id, [FromBody] Flight flight, int Passengers)
+ {
+
+ var searchflight = db.Flight.Where(i => i.Id ==
+ id);
+ if (flight != null){
+    flight.AvailableSeats = flight.AvailableSeats - Passengers;
+    db.SaveChanges();
+    return Ok(searchflight);
+ }
+else{
+ return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });  
+    }
 }
 }

@@ -7,7 +7,7 @@
  <span class='icon-bar'></span>
  <span class='icon-bar'></span> 
  </button>
-            <a class='navbar-brand'>Fisher Airlines</a>
+            <a class="navbar-brand" [routerLink]="['/']">Fisher Airlines</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
@@ -20,7 +20,7 @@
                 <li>
                      <a [routerLink]="['flightstatus']">
                         <span class='glyphicon glyphicon-time'></span> Flight Status
-                    </a>>
+                    </a>
                 </li>
                 <li>
                     <a [routerLink]="['flight']">
@@ -30,12 +30,12 @@
                 <li *ngIf="!authService.isLoggedIn()" [class.active]="isActive(['login'])">
                     <a class="login" [routerLink]="['login']">Login</a>
                 </li>
+                <li *ngIf="authService.isLoggedIn()" [class.active]="isActive(['mytickets'])">
+                     <a class="mytickets" [routerLink]="['mytickets']">My Tickets</a>
+                </li>
                 <li *ngIf="authService.isLoggedIn()">
                     <a class="logout" href="javascript:void(0)" (click)="logout()">Logout</a>
-                </li>
-                <li *ngIf="authService.isLoggedIn()" [class.active]="isActive(['item/edit', 0])">
-                    <a class="add" [routerLink]="['item/edit', 0]">Add New</a>
-                </li>
+                </li>  
             </ul>
         </div>
     </div>

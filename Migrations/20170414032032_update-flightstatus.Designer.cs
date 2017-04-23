@@ -8,12 +8,12 @@ using FisherAirlines.Data;
 namespace FisherAirlines.Migrations
 {
     [DbContext(typeof(FisherContext))]
-    partial class FisherContextModelSnapshot : ModelSnapshot
+    [Migration("20170414032032_update-flightstatus")]
+    partial class updateflightstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "1.1.1");
 
             modelBuilder.Entity("FisherAirlines.Data.ApplicationUser", b =>
@@ -71,19 +71,7 @@ namespace FisherAirlines.Migrations
                     b.Property<int>("ConfirmationNumber")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("ArrivalTime");
-
-                    b.Property<DateTime>("DepartDate");
-
-                    b.Property<string>("Departure");
-
-                    b.Property<string>("Destination");
-
-                    b.Property<int>("Id");
-
                     b.Property<int>("Passengers");
-
-                    b.Property<int>("Price");
 
                     b.Property<string>("Username");
 
@@ -101,6 +89,8 @@ namespace FisherAirlines.Migrations
 
                     b.Property<int>("AvailableSeats");
 
+                    b.Property<int?>("BookingsConfirmationNumber");
+
                     b.Property<DateTime>("DepartDate");
 
                     b.Property<string>("Departure");
@@ -110,6 +100,8 @@ namespace FisherAirlines.Migrations
                     b.Property<int>("Price");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingsConfirmationNumber");
 
                     b.ToTable("Flight");
                 });
@@ -239,6 +231,13 @@ namespace FisherAirlines.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("FisherAirlines.Models.Flight", b =>
+                {
+                    b.HasOne("FisherAirlines.Models.Bookings")
+                        .WithMany("Flights")
+                        .HasForeignKey("BookingsConfirmationNumber");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
