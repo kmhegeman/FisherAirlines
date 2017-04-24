@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using System.Data;
 
-
-[Route("flight/")]
+[Route("flights")]
 public class FlightController : Controller {
 
     private readonly FisherContext db;
@@ -16,9 +16,9 @@ public class FlightController : Controller {
 public FlightController(FisherContext context){           
     db = context;       }
 
-//Gett Flights from query
+//Get Flights from query
 
-[HttpGet("flight/GetFlights/")]
+[HttpGet("GetFlights")]
 public IActionResult GetFlights(string Destination, string Departure, DateTime DepartDate, int Passengers)
 {
 
@@ -30,7 +30,7 @@ public IActionResult GetFlights(string Destination, string Departure, DateTime D
 
 //PUT update available seats after new reservation
 
-[HttpPut("flight/{id}")]
+[HttpPut("{id}")]
  public IActionResult UpdateSeats(int id, [FromBody] Flight flight, int Passengers)
  {
 
@@ -41,7 +41,8 @@ public IActionResult GetFlights(string Destination, string Departure, DateTime D
     db.SaveChanges();
     return Ok(searchflight);
  }
-
- return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });
+else{
+ return NotFound(new { Error = String.Format("Item ID {0} has not been found", id) });  
+    }
 }
 }
