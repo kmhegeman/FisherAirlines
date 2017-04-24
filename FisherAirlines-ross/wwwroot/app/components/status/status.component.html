@@ -1,10 +1,28 @@
-    <nav>
-      <a routerLink="flightstatus"></a>
-    </nav>
-<div class='container-fluid'>
-    <div class='row'>
-        <div class='col-sm-3'>
-            <nav-bar></nav-bar>
+<div class="container">
+    <h1>Check Flight Status</h1>
+    <h2></h2>
+    <form  [formGroup]="FlightStatusForm" (submit)="GetFlightStatus(FlightId, Destination, Departure, DepartDate)">
+        <div class= "FormGroup">
+            <label>Flight Id:</label> <input formControlName="FlightId"> 
+            <label>Destination:</label> <input formControlName="Destination"> 
+            <label>Departure:</label> <input formControlName="Departure">
+            <label>Depart Date:</label> <input type="date" formControlName="DepartDate" minDate="<?php echo date('Y-m-d'); ?>"/>
         </div>
-    </div>
+      <button type="GetFlightStatus(FlightStatusForm.value)">Search</button>
+    </form>
+
+    <p>Value: {{ FlightStatusForm.value | json}}</p>
+    <p>Validation Status: {{ FlightStatusForm.status }} </p>
 </div>
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
+
+<div ng-app="fisherairlines" ng-controller="FlightStatusController">
+
+<script>
+var app = angular.module('fisherairlines', []);
+app.controller('FlightStatusController', function($scope, $http) {
+$http.get("fisher-airlines.aspx")
+.then(function (response) {$scope.FlightStatus = response.data.records;});
+});
+</script> 
