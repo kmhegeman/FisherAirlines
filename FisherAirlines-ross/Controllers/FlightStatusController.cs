@@ -18,6 +18,9 @@ public FlightStatusController(FisherContext context){
 
 //POST flightstatus
 //[HttpGet("flightstatus/{id}")]
+
+[HttpGet]
+[Route("flightstatus/GetFlightStatus/{id}")]
 public IActionResult GetFlightStatus(int FlightId, string Destination, string Departure, DateTime DepartDate )
 {
 
