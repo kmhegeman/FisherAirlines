@@ -35,9 +35,7 @@ export class StatusComponent implements OnInIt {
         })
     }
 
-    //ngOnInIt(Destination, Departure, DepartDate, FlightId) {
-        //this.GetFlights(Destination, Departure, DepartDate, FlightId);
-    //}
+
 
     GetFlightStatus(FlightStatusForm) 
     {
