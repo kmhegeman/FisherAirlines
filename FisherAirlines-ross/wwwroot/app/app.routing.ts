@@ -44,6 +44,10 @@ const appRoutes: Routes = [
     {
         path: "flightstatus",
         component: StatusComponent
+    },
+    {
+        path: "flightstatus/GetFlightStatus",
+        component: StatusComponent
     }];
     
     export const AppRoutingProviders: any[] = [];
