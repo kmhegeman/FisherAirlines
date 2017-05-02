@@ -1,5 +1,5 @@
-<div class="container">
     <h1>Search Flights</h1>
+<div class="container">
     <h2></h2>
     <form  [formGroup]="FlightForm" (submit)="GetFlights(Destination, Departure, DepartDate, Passengers)">
         <div class= "FormGroup">
@@ -15,6 +15,8 @@
     <p>Validation Status: {{ FlightForm.status }} </p>
 </div>
 
+
+<div class="container">
 <style>
 table, th, td {
 border: 1px solid grey;
@@ -29,28 +31,28 @@ background-color: #ffffff;
 }
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
 <div ng-app="fisherairlines" ng-controller="FlightController">
 
 <table>
-    <tr>
-        <th>Date</th>
-        <th>Destination</th>
-        <th>Price</th>
-        <th>Seats Available</th>
-    </tr>
-    <tr ng-repeat="x in Flight">
-        <td>{{ x.DepartDate }}</td>
-        <td>{{ x.Destination }}</td>
-        <td>{{ x.Price }}</td>
-        <td>{{ x.Passengers }}</td>
-    </tr>
+<tr>
+<th>Date</th>
+<th>Destination</th>
+<th>Price</th>
+<th>Seats Available</th>
+</tr>
+<tr ng-repeat="x in Flight">
+<td>{{ Flight.DepartDate }}</td>
+<td>{{ Flight.Destination }}</td>
+<td>{{ Flight.Price }}</td>
+<td>{{ Flight.Passengers }}</td>
+</tr>
 </table>
 
 <script>
-var app = angular.module('fisherairlines', []);
+var app = angular.module('AppModule', []);
 app.controller('FlightController', function($scope, $http) {
-$http.get("fisher-airlines.aspx")
+$http.get("fisher-airlines.sql")
 .then(function (response) {$scope.Flight = response.data.records;});
 });
 </script> 
+</div>

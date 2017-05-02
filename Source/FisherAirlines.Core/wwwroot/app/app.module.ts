@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component'
 import { LoginComponent } from './components/login/login.component'
 import { CheckoutComponent } from './components/book/checkout.component';
 import { FlightListComponent } from './components/book/Flightlist.component';
+import { StatusComponent } from './components/status/status.component'
 
 import { AppRouting } from './app.routing';
 import { AuthService } from "./auth.service";
@@ -30,6 +31,7 @@ import { FlightService } from "./flight.service"
  FlightListComponent,
  BookComponent,
  MyticketsComponent,
+ StatusComponent
  ], 
  imports: [
         BrowserModule,
