@@ -24,11 +24,6 @@ namespace FisherAirlines.Models
             this.Bookings = GetBookings(booking);
         }
 
-        public static Bookings GetBookings()
-        {
-            return null;
-        }
-
         public static Bookings GetBookings(Bookings booking)
         {
             return booking;
